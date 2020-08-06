@@ -1,7 +1,8 @@
 const router = require('express').Router();
 let Company = require('../models/companyLog.model');
 var distance = require('google-distance-matrix');
-distance.key('AIzaSyBY3nlDgNsrN9GvkXBQYu5JFIt49BCCJLU');
+DISTANCE_KEY = process.env.DISTANCE_KEY;
+distance.key('DISTANCE_KEY');
 distance.mode('transit');
 distance.transit_mode('train', 'bus');
 

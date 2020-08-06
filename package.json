@@ -6,10 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd frontend && npm run build",
-    "install-frontend": "cd frontend && npm install",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-frontend && npm run build",
-    "frontend": "cd frontend && npm start"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
@@ -20,8 +17,7 @@
     "express": "^4.17.1",
     "google-distance-matrix": "^1.1.1",
     "mongoose": "^5.9.25",
-    "react-geocode": "^0.2.1",
-    "axios": "^0.19.2"
+    "react-geocode": "^0.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

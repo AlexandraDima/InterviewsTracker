@@ -7,7 +7,7 @@ const path = require('path');
 //create express server
 const app = express();
 //port of the server
-const port = process.env.port || 5000;
+const PORT = process.env.PORT || 5000;
 
 //use the middleware cors - access outside the server
 app.use(cors());
@@ -15,8 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 //connect to mongoose
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+mongoose.connect(process.env.ATLAS_URI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 const connection = mongoose.connection;
 connection.once('open', () => {
     console.log('Mongoose connection established successfully');
@@ -36,13 +35,19 @@ app.use('/questions', questionsRouter);
 
 
 //Server static assets if in production
+if(process.env.NODE_ENV === 'production'){
+ //Set static folder
+ app.use(express.static('client/build'));
 
-    //Set static folder
-    app.use(express.static('frontend/build'));
+ app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+ })
 
+}
+   
 
  
 //start the server
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
+app.listen(PORT, () => {
+    console.log(`Server is running on port: ${PORT}`);
 })
