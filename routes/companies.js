@@ -1,10 +1,9 @@
 const router = require('express').Router();
 let Company = require('../models/companyLog.model');
-var distance = require('google-distance-matrix');
-distance.key('process.env.DISTANCE_KEY');
+ /* var distance = require('google-distance-matrix');
 distance.mode('transit');
-distance.transit_mode('train', 'bus');
-
+distance.transit_mode('train', 'bus'); */
+ 
 //get companies path
 router.route('/').get((err,res,req) =>{
 //Mongoose method to get all the companies
@@ -82,7 +81,7 @@ router.route('/update/:id').post((req, res) => {
 //get the distances
 
 //find a company
-router.route('/distances/:id').get((req,res) => {
+/* router.route('/distances/:id').get((req,res) => {
     Company.findById(req.params.id)
    
     .then(company => 
@@ -112,7 +111,7 @@ router.route('/distances/:id').get((req,res) => {
         )
     .catch(err => res.status(400).json('Error: ' + err));
 }); 
-
+ */
 
 
 
