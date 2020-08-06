@@ -7,13 +7,13 @@ import CreateCompany from './CreateCompany';
 
 function Company(props){
   const [data, setDistance] = useState([]);
-  /*    useEffect(() => {   
+     useEffect(() => {   
           axios.get('/companies/distances/' + props.company._id)
              .then(response =>   
                      setDistance(response.data)
             );
          
-     },[props.company._id]);   */
+     },[props.company._id]);   
 
   return(
     <tr>
