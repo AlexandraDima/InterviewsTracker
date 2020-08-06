@@ -181,25 +181,10 @@ export default class EditCompany extends Component{
 
     render(){
         return(
-           <div className="container col-lg-6 shadowContainer">
+           <div className="container col-lg-6 shadowContainer mx-auto">
                <h1>Edit company log</h1>
             <form onSubmit={this.onSubmit}>
-                {/* 
-                    <div className="form-group"> 
-                    <label>Username: </label>
-                    <select 
-                        required
-                        className="form-control"
-                        value={this.state.username}
-                       
-                        onChange={this.onChangeUsername}>
-                        {
-                            this.state.users.map(function(user) {
-                            return <option key={user} value={user}>{user}</option>;
-                            })
-                        }
-                    </select>
-                    </div> */}
+     
                 
                     <div className="form-group"> 
                     <label>Company name: </label>
