@@ -11,7 +11,7 @@ export default class EditQuestion extends Component{
         this.onChangeAnswer = this.onChangeAnswer.bind(this);
         this.handleClose = this.handleClose.bind(this); 
         
-        this.onSubmit = this.onSubmit.bind(this);
+        this.submitQuestion = this.submitQuestion.bind(this);
         //set the initial state of the component by assigning an object to this.state
         //create properties inside the state that correspond to the properties from MOngoDB
         this.state = {
@@ -57,18 +57,19 @@ export default class EditQuestion extends Component{
    
 
     //on submit form
-    onSubmit(e){
+    submitQuestion(e){
         e.preventDefault();
    
         const question = {
             question:this.state.question,
             answer:this.state.answer
         }
+        console.log(question);
         axios.post('/questions/update/' + this.props.id, question)
         .then(res => console.log(res.data));
 
 
-        //window.location = '/questions';
+        window.location = '/questions';
       
         
     }
@@ -84,7 +85,7 @@ export default class EditQuestion extends Component{
           <div className="container">
           <h5>Edit question</h5>
          
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.submitQuestion}>
         
               <div className="form-group"> 
               <input  type="text"
