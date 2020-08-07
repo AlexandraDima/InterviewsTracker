@@ -1,8 +1,11 @@
 const router = require('express').Router();
 let Company = require('../models/companyLog.model');
  /* var distance = require('google-distance-matrix');
+ distance.key('AIzaSyBY3nlDgNsrN9GvkXBQYu5JFIt49BCCJLU');
 distance.mode('transit');
 distance.transit_mode('train', 'bus'); */
+const axios = require('axios');
+const geolib = require('geolib');
  
 //get companies path
 router.route('/').get((err,res,req) =>{
@@ -78,7 +81,7 @@ router.route('/update/:id').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-//get the distances
+//get the distances using Google Distance Matrix
 
 //find a company
 /* router.route('/distances/:id').get((req,res) => {
@@ -112,7 +115,56 @@ router.route('/update/:id').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 }); 
  */
+//Get the distance using mapquest api, axios and geolib
+router.route('/distances/:id').get((req,res) => {
+    Company.findById(req.params.id)
+   
+    .then(company => 
+        {
+            destination = company.companyAddress;
+            origin = company.userLocation;
+            key = 'XdXvobIHEOHMLOx3ykPdZLZG7TxXhSy5';
+            //var coordinates = [];
+            let originR = axios.get(`http://open.mapquestapi.com/geocoding/v1/address?key=${key}&location=${origin}`);
+            let destinationR =  axios.get(`http://open.mapquestapi.com/geocoding/v1/address?key=${key}&location=${destination}`);
+            axios.all([originR, destinationR])
+            .then(
+                axios.spread((...responses) => {
+                    getCoordinatesOrigin = responses[0].data.results;
+                    getCoordinatesDestination = responses[1].data.results;
 
+                    for(var i = 0; i < getCoordinatesOrigin.length; i++){
+                        var locations = getCoordinatesOrigin[i].locations;
+                        //console.log(locations);
+                        for(var k = 0; k < locations.length; k++){
+                         var latitude = locations[k].latLng.lat;
+                         var longitude = locations[k].latLng.lng;
+                         var start = {latitude: latitude, longitude: longitude};
+                         }
+                    }
+
+                    for(var i = 0; i < getCoordinatesDestination.length; i++){
+                        var locations = getCoordinatesDestination[i].locations;
+                        for(var k = 0; k < locations.length; k++){
+                         var latitude = locations[k].latLng.lat;
+                         var longitude = locations[k].latLng.lng;
+                         var end = {latitude: latitude, longitude: longitude};
+
+                         }
+                    }
+                    var dist = geolib.getDistance(start, end);
+                    var distConv = geolib.convertDistance(dist, 'km');
+                    res.json({distanceToLocation:distConv.toFixed(2)});
+                
+                 
+                })
+            )
+
+        }
+       
+        )
+    .catch(err => res.status(400).json('Error: ' + err));
+}); 
 
 
 
