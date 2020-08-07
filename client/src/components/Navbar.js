@@ -33,7 +33,7 @@ export default class Navbar extends Component{
               <Link className="nav-link text-white" to="/users">Users</Link>
               </li> */}
               <li className="nav-item">
-              <Link className="nav-link text-white" to="/questions">Questions</Link>
+              <Link className="nav-link text-white" to="/questionsList">Questions</Link>
               </li>
           
             </ul>

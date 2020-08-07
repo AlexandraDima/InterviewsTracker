@@ -24,7 +24,8 @@ function App() {
       <Route path="/" exact component={CompaniesList}/>
       <Route path="/edit/:id" component={EditCompany}/>
       <Route path="/create" component={CreateCompany}/>
-     
+      <Route path="/questionsList" component={QuestionsList} /> 
+      <Route path="/editQuestion/:id" component={EditQuestion} />
       </div>
     </Router>
   );
