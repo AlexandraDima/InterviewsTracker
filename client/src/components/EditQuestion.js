@@ -69,7 +69,7 @@ export default class EditQuestion extends Component{
         .then(res => console.log(res.data));
 
 
-        window.location = '/questions';
+        window.location = '/questionsList';
       
         
     }
