@@ -6,14 +6,14 @@ import CreateCompany from './CreateCompany';
 
 
 function Company(props){
-/*   const [data, setDistance] = useState([]);
+  const [data, setDistance] = useState([]);
      useEffect(() => {   
           axios.get('/companies/distances/' + props.company._id)
              .then(response =>   
                      setDistance(response.data)
             );
          
-     },[props.company._id]);    */
+     },[props.company._id]);    
 
   return(
     <tr>
@@ -28,8 +28,7 @@ function Company(props){
         <td className = {props.company.progress==='waiting' ? 'waiting' : props.company.progress==='interview' ? 'interview' : 'rejected' }>{props.company.progress}</td>
         <td>{props.company.userLocation}</td>
         <td>{props.company.companyAddress}</td>
-      {/*    <td> {data.distance}</td> 
-        <td>{data.duration}</td>  */}
+        <td> {data.distanceToLocation}</td> 
         <td>
         <Link className="text-info" to={"/edit/" + props.company._id}><i className="fa fa-pencil mainColor"></i></Link> &nbsp;
          <i className="fa fa-trash mainColor cursorPointer" onClick={() => {props.deleteCompany(props.company._id)}}></i>
@@ -162,8 +161,7 @@ export default class CompaniesList extends Component{
                          <th>Application progress</th>
                          <th>My location</th>
                          <th>Company Address</th> 
-                {/*          <th>Distance in km </th> 
-                         <th>Duration by train </th>  */}
+                        <th>Distance in km </th> 
                          <th>Action options</th>
                      </tr>
                  </thead>
