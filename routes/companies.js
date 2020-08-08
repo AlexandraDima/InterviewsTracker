@@ -1,9 +1,5 @@
 const router = require('express').Router();
 let Company = require('../models/companyLog.model');
- /* var distance = require('google-distance-matrix');
- distance.key('AIzaSyBY3nlDgNsrN9GvkXBQYu5JFIt49BCCJLU');
-distance.mode('transit');
-distance.transit_mode('train', 'bus'); */
 const axios = require('axios');
 const geolib = require('geolib');
  
@@ -81,40 +77,7 @@ router.route('/update/:id').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-//get the distances using Google Distance Matrix
 
-//find a company
-/* router.route('/distances/:id').get((req,res) => {
-    Company.findById(req.params.id)
-   
-    .then(company => 
-        {
-            let destination = company.companyAddress;
-            let origin = company.userLocation;
-            distance.matrix( [origin],[destination], function (err, distances) {
-                if (!err)
-                var rowsDistances = distances.rows;
-                for(var i=0; i < rowsDistances.length; i++){
-                    var element = rowsDistances[i].elements;
-                    for(var j=0; j < element.length; j++){
-                        var distance = element[i].distance.text;
-                        var duration = element[i].duration.text;
-                        res.json({distance: distance, duration: duration});
-                    }
-                    
-                }
-             
-               // res.json(distances.rows);
-            })
-
-          
-
-        }
-       
-        )
-    .catch(err => res.status(400).json('Error: ' + err));
-}); 
- */
 //Get the distance using mapquest api, axios and geolib
 router.route('/distances/:id').get((req,res) => {
     Company.findById(req.params.id)

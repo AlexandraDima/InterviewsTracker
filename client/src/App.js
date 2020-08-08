@@ -10,7 +10,6 @@ import Navbar from "./components/Navbar"
 import CompaniesList from "./components/CompaniesList"
 import EditCompany from "./components/EditCompany"
 import CreateCompany from "./components/CreateCompany"
-/* import Users from "./components/Users" */
 import QuestionsList from "./components/QuestionsList"
 import EditQuestion from './components/EditQuestion';
 

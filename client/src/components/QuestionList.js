@@ -7,7 +7,6 @@ export default class QuestionList extends Component {
     constructor(props){
         super(props)
         this.showEditQuestion = this.showEditQuestion.bind(this);
-        //this.getQuestion = this.getQuestion.bind(this);
         this.state = {
             onShow:false,
             questions: []
@@ -29,9 +28,6 @@ export default class QuestionList extends Component {
               })
     }
 
-  /*   getQuestion(id){
-        return this.state.questions.find(question => question._id === id);
-    } */
  
     showEditQuestion () {
         this.setState({
@@ -56,19 +52,10 @@ export default class QuestionList extends Component {
         this.showEditQuestion() }} ></i>  } 
      
         <hr ></hr>
-      
           <EditQuestion onShow={this.state.onShow}  id={question._id}  />
-       
-          
             </div>
-      </div>
-
-       
+        </div>     
         )}
         </div>
-        
-        
-   
-    )
-}
+    )}
 }

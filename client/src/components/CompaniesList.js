@@ -17,7 +17,6 @@ function Company(props){
 
   return(
     <tr>
-      {/*   <td className="fixedColumn">{props.company.username}</td> */}
         <td className="fixedColumn">{props.company.companyName}</td>
         <td>{props.company.positionName}</td>
         <td>{props.company.jobPosting}</td>
@@ -105,28 +104,6 @@ export default class CompaniesList extends Component{
         })
     }
 
-
-        /* calculateDistance(usernameCompany){
-            //const companyUsername = this.state.companies.forEach(company => (company.username));
-            //console.log(companyUsername);
-        
-            //const companies = this.state.companies;
-            const users = this.state.users;
-        
-                for(var j=0; j < users.length; j++){
-                    var userName = users[j].username; 
-                    //console.log(userName);
-                    if(usernameCompany === userName){
-                        var location = users[j].location;
-                    // console.log(location);
-                        return location;
-                    } 
-                
-                }
-
-        };
-    */
-
         showModal () {
             this.setState({
             show:  !this.state.show
@@ -150,7 +127,6 @@ export default class CompaniesList extends Component{
               <table className="table tableCompanies table-hover ">
                  <thead className="tableThead">
                      <tr>
-                        {/*  <th className="fixedColumn">User Name</th> */}
                          <th className="fixedColumn">Company name</th>
                          <th>Position name</th>
                          <th>Position Link</th>
@@ -170,9 +146,6 @@ export default class CompaniesList extends Component{
                 </tbody>
 
             </table>
-   
-            
-            
            
          </div>
         )

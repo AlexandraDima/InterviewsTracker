@@ -7,7 +7,6 @@ export default class EditCompany extends Component{
     constructor(props){
         super(props)
         //binding this to the properties from the state
-      /*   this.onChangeUsername = this.onChangeUsername.bind(this); */
         this.onChangeUserLocation = this.onChangeUserLocation.bind(this);
         this.onChangeCompanyName = this.onChangeCompanyName.bind(this);
         this.onChangePositionName = this.onChangePositionName.bind(this);
@@ -22,7 +21,6 @@ export default class EditCompany extends Component{
         //set the initial state of the component by assigning an object to this.state
         //create properties inside the state that correspond to the properties from MOngoDB
         this.state = {
-          /*   username: '', */
             userLocation:'',
             companyName:'',
             positionName:'',
@@ -45,7 +43,6 @@ export default class EditCompany extends Component{
         axios.get('/companies/' + this.props.match.params.id)
         .then(response => {
                 this.setState({
-                    /* username: response.data.username, */
                     userLocation: response.data.userLocation,
                     companyName:response.data.companyName,
                     positionName:response.data.positionName,
@@ -64,21 +61,7 @@ export default class EditCompany extends Component{
         .catch(function (error) {
             console.log(error);
           })
-       
-        //get the list of users
-     /*    axios.get('http://localhost:5000/users/')
-            .then(response => {
-                if (response.data.length > 0){
-                    this.setState({
-                        users: response.data.map(user => user.username),
-                        //username: response.data[0].username
-                    })
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-              }) */
-
+  
         //get the list of progress options
         axios.get('/progressOptions/')
             .then(response => {
@@ -97,11 +80,7 @@ export default class EditCompany extends Component{
 
   
     //when the form inputs are changed, the properties from the state will be updated
- /*    onChangeUsername(e){
-        this.setState({
-            username: e.target.value
-        });
-    } */
+
     onChangeUserLocation(e){
         this.setState({
             userLocation: e.target.value

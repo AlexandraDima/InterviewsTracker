@@ -29,9 +29,6 @@ export default class Navbar extends Component{
               <li className="nav-item active">
                 <Link className="nav-link text-white" to="/">Logs</Link>
               </li>
-            {/*   <li className="nav-item">
-              <Link className="nav-link text-white" to="/users">Users</Link>
-              </li> */}
               <li className="nav-item">
               <Link className="nav-link text-white" to="/questionsList">Questions</Link>
               </li>
