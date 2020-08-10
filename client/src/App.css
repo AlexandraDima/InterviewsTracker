@@ -37,11 +37,23 @@
   }
 }
 
-.waiting{
+.btn.waiting{
   background-color: rgb(255, 196, 0);
   color:white;
 }
 
+.btn.interview{
+  background-color: #00ad5f;
+  color:white;
+}
+.btn.rejected{
+  background-color: #fa4251;
+  color:white;
+}
+.waiting{
+  background-color: rgb(255, 196, 0);
+  color:white;
+}
 .interview{
   background-color: #00ad5f;
   color:white;

@@ -15,7 +15,11 @@ function Company(props){
          
      },[props.company._id]);    
 
+
   return(
+
+ 
+    
     <tr>
         <td className="fixedColumn">{props.company.companyName}</td>
         <td>{props.company.positionName}</td>
@@ -42,42 +46,47 @@ export default class CompaniesList extends Component{
     constructor(props){
         super(props);
         this.deleteCompany = this.deleteCompany.bind(this);
+        this.filterProgress = this.filterProgress.bind(this);
+        this.showCompanies = this.showCompanies.bind(this);
         this.showModal = this.showModal.bind(this);
         this.onClose = this.onClose.bind(this);
         this.state = {
             companies: [],
-            show: false
-            //users:[]
+            show: false,
+            progressOptions:[]
         };
     }
 
     //get the list of companies from the db
     componentDidMount(){
     
+  
         axios.get('/companies/')
-            .then(response => {
-                this.setState({
-                    companies:response.data
-                    
-                })
-              
-            })
-            .catch((error)=>{
-                console.log(error);
-            })
-
-        //get the users
-        axios.get('/users/')
         .then(response => {
-            if (response.data.length > 0){
-                this.setState({
-                    users: response.data
-                })
-            }
+            this.setState({
+                companies:response.data
+                
+            })
+          
         })
         .catch((error)=>{
             console.log(error);
-        });
+        })
+     
+        
+        //get progressOptions
+        axios.get('/progressOptions/')
+        .then(response => {
+            if (response.data.length > 0){
+                this.setState({
+                    progressOptions: response.data,
+                })
+            }
+        })
+        .catch(function (error) {
+              console.log(error);
+        })
+   
       
     }
     
@@ -87,10 +96,14 @@ export default class CompaniesList extends Component{
 
     //companies list
     companiesList(){
+ 
         return this.state.companies.map(currentCompany=>{
 
-            return <Company company={currentCompany} deleteCompany={this.deleteCompany} key={currentCompany._id} />
+            return <Company company={currentCompany} deleteCompany={this.deleteCompany}  key={currentCompany._id} />
         })
+
+    
+                      
     }
     //delete company
     deleteCompany(id){
@@ -103,6 +116,22 @@ export default class CompaniesList extends Component{
             companies: this.state.companies.filter(company => company._id !== id)
         })
     }
+
+             
+    filterProgress(progressOption){
+        this.setState({
+            companies: this.state.companies.filter(company => company.progress === progressOption)
+          }); 
+      }
+
+   showCompanies(){
+    axios.get('/companies/')
+    .then(response => {
+        this.setState({
+            companies:response.data 
+        })
+    })
+    }  
 
         showModal () {
             this.setState({
@@ -117,14 +146,30 @@ export default class CompaniesList extends Component{
     render(){
         return(
          <div className="container">
-             
-              <button type="button" className="btn colorButton float-right mb-4"  title="Add a company" onClick={e => {
+             <div className="row mx-auto d-flex flex-row-reverse">
+        
+             <button type="button" className="btn colorButton  mb-4"  title="Add a company" onClick={e => {
               this.showModal();}}><i className="fa fa-plus" aria-hidden="true"> Add</i>
               </button> 
               <CreateCompany onClose={this.showModal} show={this.state.show} />
+       
            
+             </div>
+ 
+        
+            <div className="row mb-3 mx-auto">
+                <button type="button"  className="btn colorButton mr-2"  onClick={() => {this.showCompanies();}} title="all">all
+                </button> 
+                {this.state.progressOptions.map(progress => (
+                <button type="button" key={progress._id} className={`btn colorButton mr-2 + ${progress.progress==='waiting' ? 'waiting' : progress.progress==='interview' ? 'interview' : 'rejected'}`} onClick={() => {this.filterProgress(progress.progress);}} >{progress.progress}
+                </button> 
+            ))}
+
+            </div>
             
-              <table className="table tableCompanies table-hover ">
+          
+            <div>
+            <table className="table tableCompanies table-hover ">
                  <thead className="tableThead">
                      <tr>
                          <th className="fixedColumn">Company name</th>
@@ -146,6 +191,8 @@ export default class CompaniesList extends Component{
                 </tbody>
 
             </table>
+            </div>
+          
            
          </div>
         )

@@ -13,7 +13,6 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 //parse json - the server is sending and recieving json
 app.use(express.json());
-
 //connect to mongoose
 mongoose.connect(process.env.ATLAS_URI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 const connection = mongoose.connection;
@@ -35,7 +34,7 @@ app.use('/questions', questionsRouter);
 
 
 //Server static assets if in production
-if(process.env.NODE_ENV === 'production'){
+ if(process.env.NODE_ENV === 'production'){
  //Set static folder
  app.use(express.static('client/build'));
 
@@ -43,10 +42,9 @@ if(process.env.NODE_ENV === 'production'){
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
  })
 
-}
+} 
    
 
- 
 //start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);

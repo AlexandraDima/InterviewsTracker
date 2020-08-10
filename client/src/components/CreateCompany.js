@@ -83,11 +83,6 @@ export default class CreateCompany extends Component{
 
   
     //when the form inputs are changed, the properties from the state will be updated
-  /*   onChangeUsername(e){
-        this.setState({
-            username: e.target.value
-        });
-    } */
 
     onChangeUserLocation(e){
         this.setState({
