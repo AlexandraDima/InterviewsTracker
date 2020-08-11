@@ -17,9 +17,7 @@ function Company(props){
 
 
   return(
-
  
-    
     <tr>
         <td className="fixedColumn">{props.company.companyName}</td>
         <td>{props.company.positionName}</td>
@@ -39,28 +37,24 @@ function Company(props){
     </tr>
 )
 }
-    
-
 
 export default class CompaniesList extends Component{
     constructor(props){
         super(props);
         this.deleteCompany = this.deleteCompany.bind(this);
         this.filterProgress = this.filterProgress.bind(this);
-        this.showCompanies = this.showCompanies.bind(this);
         this.showModal = this.showModal.bind(this);
         this.onClose = this.onClose.bind(this);
         this.state = {
             companies: [],
             show: false,
-            progressOptions:[]
+            progressOptions:[] 
+         
         };
     }
 
     //get the list of companies from the db
     componentDidMount(){
-    
-  
         axios.get('/companies/')
         .then(response => {
             this.setState({
@@ -89,10 +83,6 @@ export default class CompaniesList extends Component{
    
       
     }
-    
-
-
-    
 
     //companies list
     companiesList(){
@@ -119,19 +109,21 @@ export default class CompaniesList extends Component{
 
              
     filterProgress(progressOption){
-        this.setState({
-            companies: this.state.companies.filter(company => company.progress === progressOption)
-          }); 
-      }
-
-   showCompanies(){
-    axios.get('/companies/')
+     axios.get('/companies/')
     .then(response => {
-        this.setState({
-            companies:response.data 
-        })
+        if(progressOption){
+            this.setState({
+                companies: response.data.filter(company => company.progress === progressOption)
+            })
+        } else{
+            this.setState({
+                companies:response.data 
+            })
+        }
+        
     })
-    }  
+  
+    }
 
         showModal () {
             this.setState({
@@ -158,7 +150,7 @@ export default class CompaniesList extends Component{
  
         
             <div className="row mb-3 mx-auto">
-                <button type="button"  className="btn colorButton mr-2"  onClick={() => {this.showCompanies();}} title="all">all
+                <button type="button"  className="btn colorButton mr-2"  onClick={() => {this.filterProgress();}} title="all">all
                 </button> 
                 {this.state.progressOptions.map(progress => (
                 <button type="button" key={progress._id} className={`btn colorButton mr-2 + ${progress.progress==='waiting' ? 'waiting' : progress.progress==='interview' ? 'interview' : 'rejected'}`} onClick={() => {this.filterProgress(progress.progress);}} >{progress.progress}
