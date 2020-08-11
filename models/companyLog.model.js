@@ -6,6 +6,8 @@ const companySchema = new Schema({
     userLocation:{type:String, required: false},
     companyName: { type: String, required: true },
     positionName: { type: String, required: true },
+    foundedYear: { type: Number, required: false },
+    noEmployees:{ type: Number, required: false },
     jobPosting: { type: String, required: true },
     jobDescription: { type: String, required: true },
     dateApplied: { type: Date, required: true },

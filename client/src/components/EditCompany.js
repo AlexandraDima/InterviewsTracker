@@ -16,6 +16,8 @@ export default class EditCompany extends Component{
         this.onChangeDateApplied = this.onChangeDateApplied.bind(this);
         this.onChangeDateDeadline = this.onChangeDateDeadline.bind(this);
         this.onChangeProgress = this.onChangeProgress.bind(this);
+        this.onChangeFoundedYear = this.onChangeFoundedYear.bind(this);
+        this.onChangeNoEmployees= this.onChangeNoEmployees.bind(this);
         this.onChangeCompanyAddress = this.onChangeCompanyAddress.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         //set the initial state of the component by assigning an object to this.state
@@ -133,6 +135,16 @@ export default class EditCompany extends Component{
             companyAddress: e.target.value
         });
     }
+    onChangeFoundedYear(e){
+        this.setState({
+            foundedYear: e.target.value
+        });
+    }
+    onChangeNoEmployees(e){
+        this.setState({
+            noEmployees: e.target.value
+        });
+    }
 
     //on submit form
     onSubmit(e){
@@ -149,6 +161,8 @@ export default class EditCompany extends Component{
             dateDeadline:this.state.dateDeadline,
             progress:this.state.progress,
             companyAddress:this.state.companyAddress,
+            foundedYear:this.state.foundedYear,
+            noEmployees:this.state.noEmployees,
         }
         console.log(company);
         axios.post('/companies/update/' + this.props.match.params.id, company)
@@ -258,6 +272,24 @@ export default class EditCompany extends Component{
                         className="form-control"
                         value={this.state.companyAddress}
                         onChange={this.onChangeCompanyAddress}
+                        />
+                    </div>
+                    <div className="form-group">
+                    <label> Founded year:</label>
+                    <input 
+                        type="text" 
+                        className="form-control"
+                        value={this.state.foundedYear}
+                        onChange={this.onChangeFoundedYear}
+                        />
+                    </div>
+                    <div className="form-group">
+                    <label> No employees:</label>
+                    <input 
+                        type="text" 
+                        className="form-control"
+                        value={this.state.noEmployees}
+                        onChange={this.onChangeNoEmployees}
                         />
                     </div>
 

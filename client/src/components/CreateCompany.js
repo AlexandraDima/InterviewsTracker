@@ -21,6 +21,8 @@ export default class CreateCompany extends Component{
         this.onChangeDateApplied = this.onChangeDateApplied.bind(this);
         this.onChangeDateDeadline = this.onChangeDateDeadline.bind(this);
         this.onChangeProgress = this.onChangeProgress.bind(this);
+        this.onChangeFoundedYear = this.onChangeFoundedYear.bind(this);
+        this.onChangeNoEmployees = this.onChangeNoEmployees.bind(this);
         this.onChangeCompanyAddress = this.onChangeCompanyAddress.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onClose = this.onClose.bind(this); 
@@ -40,6 +42,8 @@ export default class CreateCompany extends Component{
             dateDeadline:new Date(),
             progress:'waiting',
             companyAddress:'',
+            foundedYear:'',
+            noEmployees:'',
             users:[],
             progressOptions:[],
         }
@@ -135,6 +139,18 @@ export default class CreateCompany extends Component{
             companyAddress: e.target.value
         });
     }
+    onChangeFoundedYear(e){
+        this.setState({
+            foundedYear: e.target.value
+        });
+    }
+    onChangeNoEmployees(e){
+        this.setState({
+            noEmployees: e.target.value
+        });
+    }
+   
+   
    
      
 
@@ -153,6 +169,8 @@ export default class CreateCompany extends Component{
             dateDeadline:this.state.dateDeadline,
             progress:this.state.progress,
             companyAddress:this.state.companyAddress,
+            foundedYear:this.state.foundedYear,
+            noEmployees:this.state.noEmployees
         }
         console.log(company);
         axios.post('/companies/add', company)
@@ -300,6 +318,25 @@ export default class CreateCompany extends Component{
                         />
                     </div>
 
+                    <div className="form-group">
+                    <label> Founded year:</label>
+                    <input 
+                        type="text" 
+                        className="form-control"
+                        value={this.state.foundedYear}
+                        onChange={this.onChangeFoundedYear}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                    <label> Employees no:</label>
+                    <input 
+                        type="text" 
+                        className="form-control"
+                        value={this.state.noEmployees}
+                        onChange={this.onChangeNoEmployees}
+                        />
+                    </div>
                     <div className="form-group">
                     <input type="submit" value="Add company log" className="btn btn-primary" />
                  

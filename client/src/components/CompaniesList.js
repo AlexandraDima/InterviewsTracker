@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import "font-awesome/css/font-awesome.min.css";
 import CreateCompany from './CreateCompany';
+import ChartOvervew from './ChartOverview';
 
 
 function Company(props){
@@ -29,6 +30,9 @@ function Company(props){
         <td className = {props.company.progress==='waiting' ? 'waiting' : props.company.progress==='interview' ? 'interview' : 'rejected' }>{props.company.progress}</td>
         <td>{props.company.userLocation}</td>
         <td>{props.company.companyAddress}</td>
+     
+        <td>{props.company.foundedYear}</td>
+        <td>{props.company.noEmployees}</td>
         <td> {data.distanceToLocation}</td> 
         <td>
         <Link className="text-info" to={"/edit/" + props.company._id}><i className="fa fa-pencil mainColor"></i></Link> &nbsp;
@@ -172,6 +176,8 @@ export default class CompaniesList extends Component{
                          <th>Application progress</th>
                          <th>My location</th>
                          <th>Company Address</th> 
+                         <th>Founded year </th> 
+                         <th>No Employees </th> 
                         <th>Distance in km </th> 
                          <th>Action options</th>
                      </tr>
@@ -182,7 +188,9 @@ export default class CompaniesList extends Component{
 
             </table>
             </div>
-          
+          <div className="mx-auto m-4">
+              <ChartOvervew />
+          </div>
            
          </div>
         )

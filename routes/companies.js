@@ -18,6 +18,8 @@ router.route('/add').post((req, res)=>{
     const userLocation = req.body.userLocation;
     const companyName = req.body.companyName;
     const positionName = req.body.positionName;
+    const foundedYear= req.body.foundedYear;
+    const noEmployees = req.body.noEmployees;
     const jobPosting = req.body.jobPosting;
     const jobDescription = req.body.jobDescription;
     const dateApplied = Date.parse(req.body.dateApplied);
@@ -29,7 +31,7 @@ router.route('/add').post((req, res)=>{
     const emailContactPerson = req.body.emailContactPerson;
 
     //create new instance of company with the above properties
-    const newCompany = new Company({username, userLocation, companyName, positionName,jobPosting,jobDescription,dateApplied,dateDeadline,applied,progress,companyAddress,contactPersonName,emailContactPerson});
+    const newCompany = new Company({ userLocation, companyName, foundedYear, noEmployees, positionName,jobPosting,jobDescription,dateApplied,dateDeadline,applied,progress,companyAddress,contactPersonName,emailContactPerson});
 
     //save the new user to the database
         newCompany.save()
@@ -60,6 +62,8 @@ router.route('/update/:id').post((req, res) => {
         company.userLocation = req.body.userLocation;
         company.companyName = req.body.companyName;
         company.positionName = req.body.positionName;
+        company.foundedYear= req.body.foundedYear;
+        company.noEmployees = req.body.noEmployees;
         company.jobPosting = req.body.jobPosting;
         company.jobDescription = req.body.jobDescription;
         company.dateApplied = Date.parse(req.body.dateApplied);
