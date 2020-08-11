@@ -80,8 +80,6 @@ export default class CompaniesList extends Component{
         .catch(function (error) {
               console.log(error);
         })
-   
-      
     }
 
     //companies list
